@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>What Could I Do? | craiglambie.com</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --snow: #e8f4fd;
+      --ice: #b8d9f0;
+      --sky: #1a6fa8;
+      --warm: #c0392b;
+      --grass: #2d7a3a;
+      --earth: #8b5e3c;
+      --text: #1a1a1a;
+      --muted: #555;
+      --bg: #f5f5f0;
+      --card: #ffffff;
+      --easy: #2d7a3a;
+      --medium: #e67e22;
+      --hard: #c0392b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 500px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.72) contrast(1.08);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #fff;
+      padding: 2rem;
+      max-width: 860px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ice);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-headline {
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.4rem;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+    }
+
+    .hero-headline span {
+      color: var(--ice);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 300;
+      color: rgba(255,255,255,0.88);
+      margin-bottom: 2.4rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: #fff;
+      color: var(--sky);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.85rem 2.2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: background 0.2s, color 0.2s, transform 0.15s;
+    }
+    .hero-cta:hover { background: var(--ice); transform: translateY(-2px); }
+
+    .hero-location {
+      position: absolute;
+      bottom: 1.2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.55);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    /* ── INTRO ── */
+    .intro {
+      max-width: 760px;
+      margin: 5rem auto;
+      padding: 0 2rem;
+      text-align: center;
+    }
+    .intro h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+    .intro p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .stat-row {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2.5rem;
+    }
+    .stat-card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      min-width: 160px;
+      flex: 1;
+      max-width: 200px;
+    }
+    .stat-card .num {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--sky);
+      line-height: 1;
+    }
+    .stat-card .label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+    }
+
+    /* ── NAV TABS ── */
+    .section-nav {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 0 1rem;
+      margin-bottom: 3rem;
+    }
+    .section-nav a {
+      display: inline-block;
+      padding: 0.55rem 1.3rem;
+      border-radius: 50px;
+      background: var(--card);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.88rem;
+      text-decoration: none;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    }
+    .section-nav a:hover { border-color: var(--sky); color: var(--sky); }
+
+    /* ── SECTIONS ── */
+    .section {
+      max-width: 900px;
+      margin: 0 auto 5rem;
+      padding: 0 1.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 3px solid var(--sky);
+    }
+    .section-icon {
+      font-size: 2rem;
+      line-height: 1;
+    }
+    .section-header h2 {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 800;
+    }
+    .section-header .impact-badge {
+      margin-left: auto;
+      background: var(--sky);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      white-space: nowrap;
+    }
+
+    /* ── ACTION CARDS ── */
+    .tier-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin: 1.8rem 0 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .tier-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.2;
+    }
+    .tier-easy { color: var(--easy); }
+    .tier-medium { color: var(--medium); }
+    .tier-hard { color: var(--hard); }
+
+    .actions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .action-card {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 1.2rem 1.4rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border-left: 4px solid transparent;
+      transition: transform 0.15s, box-shadow 0.15s;
+      cursor: default;
+    }
+    .action-card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,0,0,0.1); }
+    .action-card.easy { border-left-color: var(--easy); }
+    .action-card.medium { border-left-color: var(--medium); }
+    .action-card.hard { border-left-color: var(--hard); }
+
+    .action-card h4 {
+      font-size: 0.97rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+    .action-card p {
+      font-size: 0.83rem;
+      color: var(--muted);
+      margin-bottom: 0.7rem;
+    }
+    .impact-pill {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.65rem;
+      border-radius: 50px;
+      background: #f0f0f0;
+      color: var(--muted);
+    }
+    .action-card.easy .impact-pill { background: #e8f5e9; color: var(--easy); }
+    .action-card.medium .impact-pill { background: #fff3e0; color: var(--medium); }
+    .action-card.hard .impact-pill { background: #fdecea; color: var(--hard); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #111;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-size: 0.82rem;
+    }
+    footer a { color: var(--ice); text-decoration: none; }
+    footer strong { color: #fff; }
+
+    @media (max-width: 600px) {
+      .stat-card { max-width: 100%; }
+      .actions-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="hero">
+  <img class="hero-img"
+       src="https://cdn.abacus.ai/images/28ad7377-5ab7-47f0-97ff-17010104d097.png"
+       alt="Mount Hotham Snake Gully — snow vs no snow" />
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Mount Hotham, Victoria  ·  Snake Gully</p>
+    <h1 class="hero-headline">The difference between<br/>snow and rain is<br/><span>less than 1.5°</span></h1>
+    <p class="hero-sub">A warming world is already reshaping the places we love. Here's what you can actually do about it.</p>
+    <a href="#actions" class="hero-cta">Show me what I can do →</a>
+  </div>
+  <p class="hero-location">📍 WhatCouldIDo.craiglambie.com</p>
+</section>
+
+<!-- ══════════════ INTRO ══════════════ -->
+<section class="intro" id="actions">
+  <h2>Small shifts. Real impact.</h2>
+  <p>You don't have to be perfect. Every step down this list matters — and the earlier you start, the more it compounds. Pick one thing today.</p>
+  <p>The actions below are ranked from <strong style="color:var(--easy)">easy wins</strong> to <strong style="color:var(--medium)">meaningful changes</strong> to <strong style="color:var(--hard)">high-impact commitments</strong>.</p>
+  <div class="stat-row">
+    <div class="stat-card"><div class="num">~1.5°</div><div class="label">warming separates a ski season from a rain season</div></div>
+    <div class="stat-card"><div class="num">~15%</div><div class="label">of global emissions come from food systems</div></div>
+    <div class="stat-card"><div class="num">~20×</div><div class="label">more emissions from beef vs chicken per kg protein</div></div>
+    <div class="stat-card"><div class="num">~90%</div><div class="label">of a typical flight's climate impact in just a few hours</div></div>
+  </div>
+</section>
+
+<!-- ══════════════ NAV ══════════════ -->
+<nav class="section-nav">
+  <a href="#food">🥦 Food</a>
+  <a href="#transport">🚲 Transport</a>
+  <a href="#holidays">✈️ Holidays</a>
+  <a href="#job">💼 Your Job</a>
+  <a href="#socials">📣 Socials</a>
+</nav>
+
+<!-- ══════════════ FOOD ══════════════ -->
+<section class="section" id="food">
+  <div class="section-header">
+    <span class="section-icon">🥦</span>
+    <h2>Food</h2>
+    <span class="impact-badge">Highest personal impact</span>
+  </div>
+
+  <p style="color:var(--muted);margin-bottom:0.5rem;">What you eat is one of the single biggest levers you have. Animal agriculture — especially beef and dairy — drives deforestation, methane emissions, and water use at scale.</p>
+
+  <div class="tier-label tier-easy">🟢 Easy — start here</div>
+  <div class="actions-grid">
+    <div class="action-card easy">
+      <h4>Swap cow's milk for plant milk</h4>
+      <p>Oat, almond, soy — all have a fraction of the emissions. Easy swap in coffee, cereal, cooking.</p>
+      <span class="impact-pill">Saves ~0.5 t CO₂e/yr</span>
+    </div>
+    <div class="action-card easy">
+      <h4>Cut beef by 30%</h4>
+      <p>Replace some beef meals with chicken, pork, or fish. No lifestyle overhaul needed.</p>
+      <span class="impact-pill">Saves ~0.3 t CO₂e/yr</span>
+    </div>
+    <div class="action-card easy">
+      <h4>One meat-free day per week</h4>
+      <p>A simple habit that adds up. Try "Meat-Free Monday" as a starting point.</p>
+      <span class="impact-pill">Saves ~0.2 t CO₂e/yr</span>
+    </div>
+    <div class="action-card easy">
+      <h4>Reduce food waste</h4>
+      <p>Plan meals, freeze leftovers, use your whole veg. ~30% of food produced is wasted.</p>
+      <span class="impact-pill">Saves ~0.3 t CO₂e/yr</span>
+    </div>
+  </div>
+
+  <div class="tier-label tier-medium">🟡 Medium — meaningful shift</div>
+  <div class="actions-grid">
+    <div class="action-card medium">
+      <h4>Cut beef by 50% or more</h4>
+      <p>Replace with chicken, fish, legumes. Beef is ~20× more emissions-intensive than chicken per gram of protein.</p>
+      <span class="impact-pill">Saves ~0.6 t CO₂e/yr</span>
+    </div>
+    <div class="action-card medium">
+      <h4>Stop buying cheese</h4>
+      <p>Cheese is the most emissions-intensive dairy product. Nutritional yeast, cashew cheese, or just less of it.</p>
+      <span class="impact-pill">Saves ~0.3 t CO₂e/yr</span>
+    </div>
+    <div class="action-card medium">
+      <h4>Go dairy-free</h4>
+      <p>Cut all dairy — milk, cheese, butter, yoghurt. Plant-based alternatives are now genuinely good.</p>
+      <span class="impact-pill">Saves ~0.5 t CO₂e/yr</span>
+    </div>
+    <div class="action-card medium">
+      <h4>Eat mostly whole foods</h4>
+      <p>Ultra-processed food has a surprisingly high footprint. Cooking from scratch is better for you and the planet.</p>
+      <span class="impact-pill">Saves ~0.2 t CO₂e/yr</span>
+    </div>
+  </div>
+
+  <div class="tier-label tier-hard">🔴 Hard — high impact</div>
+  <div class="actions-grid">
+    <div class="action-card hard">
+      <h4>Stop eating beef entirely</h4>
+      <p>The single biggest food-related action most people can take. Beef drives more emissions than all transport combined for many households.</p>
+      <span class="impact-pill">Saves ~1.0 t CO₂e/yr</span>
+    </div>
+    <div class="action-card hard">
+      <h4>Reduce all animal products by 80%</h4>
+      <p>Replace with beans, lentils, tofu, tempeh. Protein is easy to get — and legumes actually fix nitrogen in soil.</p>
+      <span class="impact-pill">Saves ~1.5 t CO₂e/yr</span>
+    </div>
+    <div class="action-card hard">
+      <h4>Go plant-based</h4>
+      <p>A fully plant-based diet is the highest-impact dietary choice. It's more accessible than ever in Australia.</p>
+      <span class="impact-pill">Saves ~1.5–2.0 t CO₂e/yr</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ TRANSPORT ══════════════ -->
+<section class="section" id="transport">
+  <div class="section-header">
+    <span class="section-icon">🚲</span>
+    <h2>Transport</h2>
+    <span class="impact-badge">Big daily wins</span>
+  </div>
+  <p style="color:var(--muted);margin-bottom:0.5rem;">Cars are responsible for around 12% of global CO₂ emissions. In Australia, where distances are long and public transport is patchy, this one takes effort — but the savings are real.</p>
+
+  <div class="tier-label tier-easy">🟢 Easy — start here</div>
+  <div class="actions-grid">
+    <div class="action-card easy">
+      <h4>Walk or cycle for short trips</h4>
+      <p>Any trip under 3km — walk it. Under 8km — try cycling. It's faster than you think in traffic.</p>
+      <span class="impact-pill">Saves ~0.2 t CO₂e/yr</span>
+    </div>
+    <div class="action-card easy">
+      <h4>Combine errands into one trip</h4>
+      <p>Fewer cold-start trips = fewer emissions. Plan your week and batch your driving.</p>
+      <span class="impact-pill">Saves ~0.1 t CO₂e/yr</span>
+    </div>
+    <div class="action-card easy">
+      <h4>Use public transport once a week</h4>
+      <p>Replace one car commute per week with train, tram, or bus. Build the habit gradually.</p>
+      <span class="impact-pill">Saves ~0.15 t CO₂e/yr</span>
+    </div>
+  </div>
+
+  <div class="tier-label tier-medium">🟡 Medium — meaningful shift</div>
+  <div class="actions-grid">
+    <div class="action-card medium">
+      <h4>Commute by PT or bike full-time</h4>
+      <p>If you can, ditch the car commute entirely. Combine PT with a folding bike or e-bike for the last mile.</p>
+      <span class="impact-pill">Saves ~1.0 t CO₂e/yr</span>
+    </div>
+    <div class="action-card medium">
+      <h4>Go car-free for a month</h4>
+      <p>A trial run. You'll discover what's actually possible — and what you genuinely need a car for.</p>
+      <span class="impact-pill">Saves ~0.5 t CO₂e/yr</span>
+    </div>
+    <div class="action-card medium">
+      <h4>Buy an e-bike</h4>
+      <p>E-bikes replace car trips more effectively than regular bikes. The fastest-growing transport category in Australia for good reason.</p>
+      <span class="impact-pill">Saves ~0.8 t CO₂e/yr</span>
+    </div>
+  </div>
+
+  <div class="tier-label tier-hard">🔴 Hard — high impact</div>
+  <div class="actions-grid">
+    <div class="action-card hard">
+      <h4>Go car-free</h4>
+      <p>Hard in many Australian cities, but possible in inner suburbs. Car share + PT + e-bike covers most needs.</p>
+      <span class="impact-pill">Saves ~2.0 t CO₂e/yr</span>
+    </div>
+    <div class="action-card hard">
+      <h4>Switch to an EV (charged on renewables)</h4>
+      <p>If you need a car, an EV on a green energy plan cuts transport emissions by ~70–80%.</p>
+      <span class="impact-pill">Saves ~1.5 t CO₂e/yr</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ HOLIDAYS ══════════════ -->
+<section class="section" id="holidays">
+  <div class="section-header">
+    <span class="section-icon">✈️</span>
+    <h2>Holidays</h2>
+    <span class="impact-badge">Highest single-event impact</span>
+  </div>
+  <p style="color:var(--muted);margin-bottom:0.5rem;">A single return long-haul flight can wipe out an entire year of other savings. Flying is the fastest way to blow your carbon budget — but there are real alternatives.</p>
+
+  <div class="tier-label tier-easy">🟢 Easy — start here</div>
+  <div class="actions-grid">
+    <div class="action-card easy">
+      <h4>Explore locally first</h4>
+      <p>Australia has extraordinary places most Australians have never seen. The Kimberley, Tassie, the Flinders Ranges — no flight needed.</p>
+      <span class="impact-pill">Saves ~1.5 t CO₂e per avoided flight</span>
+    </div>
+    <div class="action-card easy">
+      <h4>Fly economy, not business</h4>
+      <p>Business class uses 3–4× more space per person = 3–4× the emissions per seat. Economy is the lower-impact choice.</p>
+      <span class="impact-pill">Saves ~2.0 t CO₂e per long-haul trip</span>
+    </div>
+    <div class="action-card easy">
+      <h4>Offset your flights (critically)</h4>
+      <p>Not a free pass — but a meaningful supplement. Use Gold Standard or Verra-certified offsets only.</p>
+      <span class="impact-pill">Partial mitigation</span>
+    </div>
+  </div>
+
+  <div class="tier-label tier-medium">🟡 Medium — meaningful shift</div>
+  <div class="actions-grid">
+    <div class="action-card medium">
+      <h4>Replace a short-haul flight with train or bus</h4>
+      <p>Sydney–Melbourne by train is a genuine option. Europe by rail is often faster city-to-city than flying.</p>
+      <span class="impact-pill">Saves ~0.3 t CO₂e per trip</span>
+    </div>
+    <div class="action-card medium">
+      <h4>Take fewer, longer trips</h4>
+      <p>One 3-week trip emits less than three 1-week trips. Slow travel is lower-carbon travel.</p>
+      <span class="impact-pill">Saves ~1.0 t CO₂e/yr</span>
+    </div>
+  </div>
+
+  <div class="tier-label tier-hard">🔴 Hard — high impact</div>
+  <div class="actions-grid">
+    <div class="action-card hard">
+      <h4>Commit to one flight per year maximum</h4>
+      <p>A personal flight budget. Hard if you have family overseas — but a powerful commitment if you can make it.</p>
+      <span class="impact-pill">Saves ~2–4 t CO₂e/yr</span>
+    </div>
+    <div class="action-card hard">
+      <h4>Go flight-free</h4>
+      <p>The highest-impact holiday decision. Explore by train, ship, or road. A growing movement globally.</p>
+      <span class="impact-pill">Saves ~3–5 t CO₂e/yr</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ JOB ══════════════ -->
+<section class="section" id="job">
+  <div class="section-header">
+    <span class="section-icon">💼</span>
+    <h2>In Your Job</h2>
+    <span class="impact-badge">Multiplied impact</span>
+  </div>
+  <p style="color:var(--muted);margin-bottom:0.5rem;">Your workplace decisions can have far more leverage than personal choices. One policy change, one supplier swap, one conversation with leadership can move more carbon than years of personal action.</p>
+
+  <div class="tier-label tier-easy">🟢 Easy — start here</div>
+  <div class="actions-grid">
+    <div class="action-card easy">
+      <h4>Work from home when you can</h4>
+      <p>Every day you don't commute is a day of transport emissions saved — for you and your employer's Scope 3.</p>
+      <span class="impact-pill">Saves ~0.3 t CO₂e/yr</span>
+    </div>
+    <div class="action-card easy">
+      <h4>Replace work flights with video calls</h4>
+      <p>Most meetings don't need to be in person. Push back on unnecessary travel.</p>
+      <span class="impact-pill">Saves ~1.0 t CO₂e per avoided flight</span>
+    </div>
+    <div class="action-card easy">
+      <h4>Switch your office to green energy</h4>
+      <p>Ask facilities or management. GreenPower accreditation in Australia is straightforward for businesses.</p>
+      <span class="impact-pill">High leverage</span>
+    </div>
+  </div>
+
+  <div class="tier-label tier-medium">🟡 Medium — meaningful shift</div>
+  <div class="actions-grid">
+    <div class="action-card medium">
+      <h4>Audit your company's supply chain</h4>
+      <p>Scope 3 emissions (supply chain) are often 70–90% of a company's total footprint. Push for a supplier audit.</p>
+      <span class="impact-pill">Potentially massive</span>
+    </div>
+    <div class="action-card medium">
+      <h4>Champion a sustainability policy</h4>
+      <p>Draft a simple climate policy for your team or department. Even small internal policies create accountability.</p>
+      <span class="impact-pill">Multiplied impact</span>
+    </div>
+    <div class="action-card medium">
+      <h4>Shift your super to ethical funds</h4>
+      <p>Your superannuation is likely invested in fossil fuels. Australian Ethical, Future Super, and others offer alternatives.</p>
+      <span class="impact-pill">Saves ~10–20 t CO₂e/yr equivalent</span>
+    </div>
+  </div>
+
+  <div class="tier-label tier-hard">🔴 Hard — high impact</div>
+  <div class="actions-grid">
+    <div class="action-card hard">
+      <h4>Work for a climate-positive organisation</h4>
+      <p>The most impactful career move. Your skills applied to climate solutions multiply your personal impact enormously.</p>
+      <span class="impact-pill">Transformative</span>
+    </div>
+    <div class="action-card hard">
+      <h4>Divest your business from fossil fuels</h4>
+      <p>If you have influence over investment decisions, push for full divestment from fossil fuel assets.</p>
+      <span class="impact-pill">Systemic impact</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SOCIALS ══════════════ -->
+<section class="section" id="socials">
+  <div class="section-header">
+    <span class="section-icon">📣</span>
+    <h2>Socials & Community</h2>
+    <span class="impact-badge">Norm-shifting power</span>
+  </div>
+  <p style="color:var(--muted);margin-bottom:0.5rem;">Social norms drive behaviour more than information does. When you talk about what you're doing, you give others permission to do the same. Your voice is a tool.</p>
+
+  <div class="tier-label tier-easy">🟢 Easy — start here</div>
+  <div class="actions-grid">
+    <div class="action-card easy">
+      <h4>Share what you're doing, not what others should do</h4>
+      <p>"I switched to oat milk and honestly can't tell the difference" lands better than "you should stop drinking dairy."</p>
+      <span class="impact-pill">Norm-shifting</span>
+    </div>
+    <div class="action-card easy">
+      <h4>Follow and amplify climate voices</h4>
+      <p>Boost scientists, journalists, and advocates doing good work. Algorithms reward engagement — use that.</p>
+      <span class="impact-pill">Awareness</span>
+    </div>
+    <div class="action-card easy">
+      <h4>Talk about it at the dinner table</h4>
+      <p>Research shows family conversations are one of the most effective ways to shift attitudes — especially with older generations.</p>
+      <span class="impact-pill">High personal leverage</span>
+    </div>
+  </div>
+
+  <div class="tier-label tier-medium">🟡 Medium — meaningful shift</div>
+  <div class="actions-grid">
+    <div class="action-card medium">
+      <h4>Join a local climate group</h4>
+      <p>Climate Conversations, local council sustainability committees, community gardens — collective action compounds.</p>
+      <span class="impact-pill">Community leverage</span>
+    </div>
+    <div class="action-card medium">
+      <h4>Write to your local MP</h4>
+      <p>Politicians track constituent contact. A personal letter (not a form email) carries real weight.</p>
+      <span class="impact-pill">Political leverage</span>
+    </div>
+    <div class="action-card medium">
+      <h4>Vote with climate as a priority</h4>
+      <p>Policy change dwarfs individual action. Use your vote — and encourage others to do the same.</p>
+      <span class="impact-pill">Systemic</span>
+    </div>
+  </div>
+
+  <div class="tier-label tier-hard">🔴 Hard — high impact</div>
+  <div class="actions-grid">
+    <div class="action-card hard">
+      <h4>Run for local council or a board</h4>
+      <p>Local government controls planning, transport, and land use. Getting involved directly is high-leverage.</p>
+      <span class="impact-pill">Systemic impact</span>
+    </div>
+    <div class="action-card hard">
+      <h4>Organise, don't just participate</h4>
+      <p>Start a conversation series, a community composting scheme, a workplace sustainability group. Leaders multiply impact.</p>
+      <span class="impact-pill">Multiplied impact</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <p style="margin-bottom:0.5rem;"><strong>WhatCouldIDo.craiglambie.com</strong></p>
+  <p>A personal project by <a href="https://craiglambie.com">Craig Lambie</a>. Not affiliated with any organisation.</p>
+  <p style="margin-top:0.8rem;">Emissions figures are approximate averages for Australian households. Sources: Project Drawdown, OurWorldInData, ClimateCouncil.org.au</p>
+</footer>
+
+</body>
+</html>
