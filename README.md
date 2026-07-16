@@ -1,4 +1,4 @@
-# What Could I Do? ([WhatCouldIDo.craiglambie.com](http://WhatCouldIDo.craiglambie.com))
+# What Could I Do? ([ButWhatCanIDo.craiglambie.com](https://ButWhatCanIDo.craiglambie.com))
 
 A high-impact, single-page web application designed to educate and inspire individual climate action. This project uses the visual reality of Mount Hotham's changing landscape to ground the global "1.5°C" goal in a local, tangible context.
 
@@ -31,7 +31,7 @@ This page breaks down climate action into manageable, tiered steps across five k
 
 * **Deployment:** GitHub Pages
 
-* **Domain:** [WhatCouldIDo.craiglambie.com](http://WhatCouldIDo.craiglambie.com)
+* **Domain:** [ButWhatCanIDo.craiglambie.com](http://ButWhatCanIDo.craiglambie.com)
 
 ## 📁 Repository Structure
 
