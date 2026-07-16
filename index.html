@@ -18,7 +18,7 @@
       --text: #1a1a1a;
       --muted: #555;
       --bg: #f5f5f0;
-      --card: #ffffff;
+      --card: #ffff;
       --easy: #2d7a3a;
       --medium: #e67e22;
       --hard: #c0392b;
@@ -44,7 +44,6 @@
       align-items: center;
       justify-content: center;
     }
-
     .hero-img {
       position: absolute;
       inset: 0;
@@ -54,13 +53,11 @@
       object-position: center;
       filter: brightness(0.72) contrast(1.08);
     }
-
     .hero-overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 100%);
     }
-
     .hero-content {
       position: relative;
       z-index: 2;
@@ -69,7 +66,6 @@
       padding: 2rem;
       max-width: 860px;
     }
-
     .hero-eyebrow {
       font-size: 0.8rem;
       font-weight: 600;
@@ -78,7 +74,6 @@
       color: var(--ice);
       margin-bottom: 1.2rem;
     }
-
     .hero-headline {
       font-size: clamp(2rem, 5vw, 4rem);
       font-weight: 900;
@@ -87,11 +82,7 @@
       margin-bottom: 1.4rem;
       text-shadow: 0 2px 20px rgba(0,0,0,0.6);
     }
-
-    .hero-headline span {
-      color: var(--ice);
-    }
-
+    .hero-headline span { color: var(--ice); }
     .hero-sub {
       font-size: clamp(1rem, 2vw, 1.25rem);
       font-weight: 300;
@@ -101,7 +92,6 @@
       margin-left: auto;
       margin-right: auto;
     }
-
     .hero-cta {
       display: inline-block;
       background: #fff;
@@ -115,7 +105,6 @@
       transition: background 0.2s, color 0.2s, transform 0.15s;
     }
     .hero-cta:hover { background: var(--ice); transform: translateY(-2px); }
-
     .hero-location {
       position: absolute;
       bottom: 1.2rem;
@@ -173,14 +162,47 @@
       margin-top: 0.4rem;
     }
 
+    /* ── SMALL SHARE NUDGE ── */
+    .share-nudge-small {
+      max-width: 760px;
+      margin: 0 auto 3rem;
+      padding: 0 2rem;
+      text-align: center;
+    }
+    .share-nudge-small a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #fff;
+      border: 2px solid var(--sky);
+      color: var(--sky);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.55rem 1.4rem;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .share-nudge-small a:hover { background: var(--sky); color: #fff; }
+    .share-nudge-small p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
     /* ── NAV TABS ── */
     .section-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--bg);
       display: flex;
       gap: 0.5rem;
       justify-content: center;
       flex-wrap: wrap;
-      padding: 0 1rem;
+      padding: 0.75rem 1rem;
       margin-bottom: 3rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
     .section-nav a {
       display: inline-block;
@@ -203,7 +225,6 @@
       margin: 0 auto 5rem;
       padding: 0 1.5rem;
     }
-
     .section-header {
       display: flex;
       align-items: center;
@@ -212,14 +233,8 @@
       padding-bottom: 1rem;
       border-bottom: 3px solid var(--sky);
     }
-    .section-icon {
-      font-size: 2rem;
-      line-height: 1;
-    }
-    .section-header h2 {
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      font-weight: 800;
-    }
+    .section-icon { font-size: 2rem; line-height: 1; }
+    .section-header h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; }
     .section-header .impact-badge {
       margin-left: auto;
       background: var(--sky);
@@ -258,7 +273,6 @@
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 1rem;
     }
-
     .action-card {
       background: var(--card);
       border-radius: 14px;
@@ -272,17 +286,8 @@
     .action-card.easy { border-left-color: var(--easy); }
     .action-card.medium { border-left-color: var(--medium); }
     .action-card.hard { border-left-color: var(--hard); }
-
-    .action-card h4 {
-      font-size: 0.97rem;
-      font-weight: 700;
-      margin-bottom: 0.35rem;
-    }
-    .action-card p {
-      font-size: 0.83rem;
-      color: var(--muted);
-      margin-bottom: 0.7rem;
-    }
+    .action-card h4 { font-size: 0.97rem; font-weight: 700; margin-bottom: 0.35rem; }
+    .action-card p { font-size: 0.83rem; color: var(--muted); margin-bottom: 0.7rem; }
     .impact-pill {
       display: inline-block;
       font-size: 0.72rem;
@@ -296,6 +301,40 @@
     .action-card.medium .impact-pill { background: #fff3e0; color: var(--medium); }
     .action-card.hard .impact-pill { background: #fdecea; color: var(--hard); }
 
+    /* ── BIG SHARE SECTION ── */
+    .share-big {
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 4rem 2rem;
+      margin-top: 2rem;
+    }
+    .share-big h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 900;
+      margin-bottom: 0.8rem;
+    }
+    .share-big p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.65);
+      max-width: 520px;
+      margin: 0 auto 2rem;
+    }
+    .share-big-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--sky);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 1rem 2.6rem;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .share-big-btn:hover { background: #1558a0; transform: translateY(-2px); }
+
     /* ── FOOTER ── */
     footer {
       background: #111;
@@ -303,6 +342,7 @@
       text-align: center;
       padding: 2.5rem 1rem;
       font-size: 0.82rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
     footer a { color: var(--ice); text-decoration: none; }
     footer strong { color: #fff; }
@@ -315,7 +355,7 @@
 </head>
 <body>
 
-<!-- ══════════════ HERO ══════════════ -->
+<!-- ════ HERO ════ -->
 <section class="hero">
   <img class="hero-img"
        src="assets/snow_rain_no_txt.png"
@@ -330,7 +370,7 @@
   <p class="hero-location">📍 ButWhatCanIDo.craiglambie.com</p>
 </section>
 
-<!-- ══════════════ INTRO ══════════════ -->
+<!-- ════ INTRO ════ -->
 <section class="intro" id="actions">
   <h2>Small shifts. Real impact.</h2>
   <p>You don't have to be perfect. Every step down this list matters — and the earlier you start, the more it compounds. Pick one thing today.</p>
@@ -343,23 +383,29 @@
   </div>
 </section>
 
-<!-- ══════════════ NAV ══════════════ -->
+<!-- ════ SMALL SHARE NUDGE ════ -->
+<div class="share-nudge-small">
+  <p>Know someone who'd find this useful? Download the poster or share it on socials.</p>
+  <a href="spreadtheword.html">📣 Share & Print →</a>
+</div>
+
+<!-- ════ NAV ════ -->
 <nav class="section-nav">
   <a href="#food">🥦 Food</a>
   <a href="#transport">🚲 Transport</a>
+  <a href="#home">🏠 Home</a>
   <a href="#holidays">✈️ Holidays</a>
   <a href="#job">💼 Your Job</a>
   <a href="#socials">📣 Socials</a>
 </nav>
 
-<!-- ══════════════ FOOD ══════════════ -->
+<!-- ════ FOOD ════ -->
 <section class="section" id="food">
   <div class="section-header">
     <span class="section-icon">🥦</span>
     <h2>Food</h2>
     <span class="impact-badge">Highest personal impact</span>
   </div>
-
   <p style="color:var(--muted);margin-bottom:0.5rem;">What you eat is one of the single biggest levers you have. Animal agriculture — especially beef and dairy — drives deforestation, methane emissions, and water use at scale.</p>
 
   <div class="tier-label tier-easy">🟢 Easy — start here</div>
@@ -430,7 +476,7 @@
   </div>
 </section>
 
-<!-- ══════════════ TRANSPORT ══════════════ -->
+<!-- ════ TRANSPORT ════ -->
 <section class="section" id="transport">
   <div class="section-header">
     <span class="section-icon">🚲</span>
@@ -492,7 +538,94 @@
   </div>
 </section>
 
-<!-- ══════════════ HOLIDAYS ══════════════ -->
+<!-- ════ HOME ════ -->
+<section class="section" id="home">
+  <div class="section-header">
+    <span class="section-icon">🏠</span>
+    <h2>Home</h2>
+    <span class="impact-badge">Get off gas</span>
+  </div>
+  <p style="color:var(--muted);margin-bottom:0.5rem;">Gas has a CO₂e footprint roughly 3–5× higher than grid electricity for the same energy output — and the grid is getting cleaner every year. Electrifying your home is one of the most durable changes you can make.</p>
+
+  <div class="tier-label tier-easy">🟢 Easy — start here</div>
+  <div class="actions-grid">
+    <div class="action-card easy">
+      <h4>Switch to a green energy plan</h4>
+      <p>GreenPower-accredited plans are available from most retailers. Every appliance you run becomes lower-carbon instantly.</p>
+      <span class="impact-pill">Saves ~0.5–1.5 t CO₂e/yr</span>
+    </div>
+    <div class="action-card easy">
+      <h4>Plug-in induction cooktop</h4>
+      <p>A portable induction cooktop from ~$50 lets you cook on electricity without replacing your stove. Faster, cleaner, safer.</p>
+      <span class="impact-pill">Saves ~0.2 t CO₂e/yr</span>
+    </div>
+    <div class="action-card easy">
+      <h4>Use an air fryer or electric appliances</h4>
+      <p>Air fryers, electric kettles, and rice cookers are more efficient than gas ovens for most everyday cooking tasks.</p>
+      <span class="impact-pill">Saves ~0.1 t CO₂e/yr</span>
+    </div>
+    <div class="action-card easy">
+      <h4>Switch to electric heating</h4>
+      <p>Far infrared panels, column heaters, and portable reverse-cycle units are all lower-emission than gas heating.</p>
+      <span class="impact-pill">Saves ~0.3–0.8 t CO₂e/yr</span>
+    </div>
+    <div class="action-card easy">
+      <h4>Draught-proof your home</h4>
+      <p>Door snakes, draught excluders, and foam tape around windows and doors. Cheap, immediate, and surprisingly effective.</p>
+      <span class="impact-pill">Saves ~0.2 t CO₂e/yr</span>
+    </div>
+    <div class="action-card easy">
+      <h4>Temporary window insulation</h4>
+      <p>Bubble wrap on single-glazed windows, corflute pelmets above curtains, and simple lined curtains all reduce heat loss significantly.</p>
+      <span class="impact-pill">Saves ~0.2 t CO₂e/yr</span>
+    </div>
+  </div>
+
+  <div class="tier-label tier-medium">🟡 Medium — meaningful shift</div>
+  <div class="actions-grid">
+    <div class="action-card medium">
+      <h4>Upgrade to a heat-pump hot water system</h4>
+      <p>Heat-pump hot water uses ~3× less energy than electric resistance and ~5× less than gas. One of the best ROI upgrades available.</p>
+      <span class="impact-pill">Saves ~0.8–1.5 t CO₂e/yr</span>
+    </div>
+    <div class="action-card medium">
+      <h4>Install a reverse-cycle air conditioner</h4>
+      <p>Modern reverse-cycle units are the most efficient way to heat and cool. Replace gas heaters and window units with one system.</p>
+      <span class="impact-pill">Saves ~0.5–1.0 t CO₂e/yr</span>
+    </div>
+    <div class="action-card medium">
+      <h4>Upgrade your insulation</h4>
+      <p>Ceiling insulation is the highest-impact upgrade for most Australian homes. Wall and underfloor insulation compound the gains.</p>
+      <span class="impact-pill">Saves ~0.5 t CO₂e/yr</span>
+    </div>
+    <div class="action-card medium">
+      <h4>Commit to quality draught-proofing</h4>
+      <p>Go beyond door snakes — seal skirting boards, cornices, exhaust fans, and ceiling penetrations. A well-sealed home holds temperature far longer.</p>
+      <span class="impact-pill">Saves ~0.3 t CO₂e/yr</span>
+    </div>
+  </div>
+
+  <div class="tier-label tier-hard">🔴 Hard — high impact</div>
+  <div class="actions-grid">
+    <div class="action-card hard">
+      <h4>Install solar panels and a battery</h4>
+      <p>Solar + battery lets you run your home on clean energy day and night. Pairs perfectly with an EV and heat-pump appliances.</p>
+      <span class="impact-pill">Saves ~2.0–4.0 t CO₂e/yr</span>
+    </div>
+    <div class="action-card hard">
+      <h4>Replace your gas cooktop with induction</h4>
+      <p>A full induction cooktop is faster, easier to clean, and eliminates indoor NO₂ pollution from gas flames. The last gas appliance to go.</p>
+      <span class="impact-pill">Saves ~0.3 t CO₂e/yr</span>
+    </div>
+    <div class="action-card hard">
+      <h4>Full sealing, insulation + MVHR system</h4>
+      <p>A Mechanical Ventilation with Heat Recovery (MVHR) system lets you fully seal your home for maximum efficiency while maintaining fresh air. Passive-house level performance.</p>
+      <span class="impact-pill">Saves ~1.0–2.0 t CO₂e/yr</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════ HOLIDAYS ════ -->
 <section class="section" id="holidays">
   <div class="section-header">
     <span class="section-icon">✈️</span>
@@ -549,7 +682,7 @@
   </div>
 </section>
 
-<!-- ══════════════ JOB ══════════════ -->
+<!-- ════ JOB ════ -->
 <section class="section" id="job">
   <div class="section-header">
     <span class="section-icon">💼</span>
@@ -611,7 +744,7 @@
   </div>
 </section>
 
-<!-- ══════════════ SOCIALS ══════════════ -->
+<!-- ════ SOCIALS ════ -->
 <section class="section" id="socials">
   <div class="section-header">
     <span class="section-icon">📣</span>
@@ -673,7 +806,14 @@
   </div>
 </section>
 
-<!-- ══════════════ FOOTER ══════════════ -->
+<!-- ════ BIG SHARE CTA ════ -->
+<div class="share-big">
+  <h2>📣 Spread the 1.5° message</h2>
+  <p>Download the A3 poster, grab a ready-made social post, or share the link. The more people who see this, the more it matters.</p>
+  <a href="spreadtheword.html" class="share-big-btn">Share & Print →</a>
+</div>
+
+<!-- ════ FOOTER ════ -->
 <footer>
   <p style="margin-bottom:0.5rem;"><strong>ButWhatCanIDo.craiglambie.com</strong></p>
   <p>A personal project by <a href="https://craiglambie.com">Craig Lambie</a>. Not affiliated with any organisation.</p>

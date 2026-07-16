@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Spread the Word | ButWhatCanIDo.craiglambie.com</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --sky: #1a6fa8;
+      --ice: #b8d9f0;
+      --snow: #e8f4fd;
+      --easy: #2d7a3a;
+      --warm: #c0392b;
+      --text: #1a1a1a;
+      --muted: #555;
+      --bg: #f5f5f0;
+      --card: #ffffff;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; width: 100%; height: 70vh; min-height: 420px;
+      overflow: hidden; display: flex; align-items: center; justify-content: center;
+    }
+    .hero-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      filter: brightness(0.65) contrast(1.1);
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2; text-align: center;
+      color: #fff; padding: 2rem; max-width: 780px;
+    }
+    .hero-eyebrow {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--ice); margin-bottom: 1rem;
+    }
+    .hero-headline {
+      font-size: clamp(1.8rem, 4.5vw, 3.4rem); font-weight: 900;
+      line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.2rem;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+    }
+    .hero-headline span { color: var(--ice); }
+    .hero-sub {
+      font-size: clamp(0.95rem, 1.8vw, 1.15rem); font-weight: 300;
+      color: rgba(255,255,255,0.85); max-width: 560px; margin: 0 auto;
+    }
+
+    /* ── INTRO ── */
+    .intro {
+      text-align: center; padding: 4rem 1.5rem 2.5rem;
+      max-width: 720px; margin: 0 auto;
+    }
+    .intro h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 800; margin-bottom: 1rem; }
+    .intro p { font-size: 1.05rem; color: var(--muted); margin-bottom: 0.8rem; }
+
+    /* ── TABS ── */
+    .tabs-wrapper {
+      max-width: 960px; margin: 0 auto 3rem; padding: 0 1.5rem;
+    }
+    .tab-nav {
+      display: flex; gap: 0; border-bottom: 3px solid #ddd;
+      margin-bottom: 0;
+    }
+    .tab-btn {
+      flex: 1; padding: 1rem 1.5rem; font-size: 1rem; font-weight: 700;
+      background: none; border: none; cursor: pointer; color: var(--muted);
+      border-bottom: 3px solid transparent; margin-bottom: -3px;
+      transition: color 0.2s, border-color 0.2s;
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    }
+    .tab-btn:hover { color: var(--sky); }
+    .tab-btn.active { color: var(--sky); border-bottom-color: var(--sky); }
+    .tab-btn .tab-icon { font-size: 1.3rem; }
+
+    .tab-panel { display: none; padding-top: 2.5rem; }
+    .tab-panel.active { display: block; }
+
+    /* ── PRINT TAB ── */
+    .print-action-bar {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      margin-bottom: 2.5rem; align-items: center;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-weight: 700; font-size: 0.95rem; padding: 0.85rem 1.6rem;
+      border-radius: 50px; text-decoration: none; border: none; cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: var(--sky); color: #fff;
+      box-shadow: 0 4px 16px rgba(26,111,168,0.3);
+    }
+    .btn-primary:hover { background: #155d8e; }
+    .btn-outline {
+      background: #fff; color: var(--sky);
+      border: 2px solid var(--sky);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .btn-outline:hover { background: var(--snow); }
+    .btn svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
+
+    .poster-layout {
+      display: grid; grid-template-columns: 1fr 1.4fr; gap: 2.5rem; align-items: start;
+    }
+    .poster-preview {
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      aspect-ratio: 1 / 1.414;
+      background: #111; display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .poster-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .poster-label {
+      position: absolute; bottom: 0.8rem; left: 50%; transform: translateX(-50%);
+      background: rgba(0,0,0,0.6); color: #fff; font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase; padding: 0.3rem 0.8rem;
+      border-radius: 50px; white-space: nowrap;
+    }
+    .poster-info h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.7rem; }
+    .poster-info p { font-size: 0.95rem; color: var(--muted); margin-bottom: 1rem; }
+    .poster-info ul { list-style: none; margin-bottom: 1.5rem; }
+    .poster-info ul li {
+      font-size: 0.9rem; color: var(--muted); padding: 0.3rem 0;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .poster-info ul li::before { content: '✓'; color: var(--easy); font-weight: 700; }
+    .file-note { font-size: 0.75rem; color: #aaa; margin-top: 0.6rem; }
+
+    .print-tip {
+      background: var(--snow); border-left: 4px solid var(--sky);
+      border-radius: 0 10px 10px 0; padding: 1rem 1.2rem;
+      font-size: 0.88rem; color: var(--muted); margin-top: 1.5rem;
+    }
+    .print-tip strong { color: var(--text); }
+
+    /* ── HOW TO STEPS ── */
+    .steps-section { margin-top: 2.5rem; }
+    .steps-section h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 1.2rem; }
+    .steps {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem;
+    }
+    .step {
+      background: var(--card); border-radius: 14px; padding: 1.3rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .step .num { font-size: 1.8rem; font-weight: 900; color: var(--sky); line-height: 1; margin-bottom: 0.4rem; }
+    .step h4 { font-size: 0.93rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .step p { font-size: 0.82rem; color: var(--muted); }
+
+    /* ── SOCIALS TAB ── */
+    .social-action-bar {
+      display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2.5rem;
+    }
+    .btn-social {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-weight: 700; font-size: 0.88rem; padding: 0.75rem 1.3rem;
+      border-radius: 50px; text-decoration: none; border: none; cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      color: #fff;
+    }
+    .btn-social:hover { opacity: 0.88; transform: translateY(-2px); }
+    .btn-social svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
+    .btn-fediverse { background: #563acc; }
+    .btn-bluesky   { background: #0085ff; }
+    .btn-instagram { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .btn-facebook  { background: #1877f2; }
+    .btn-twitter   { background: #000; }
+    .btn-linkedin  { background: #0a66c2; }
+    .btn-copy-link { background: #444; }
+
+    .captions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+    .caption-card {
+      background: var(--card); border-radius: 16px; padding: 1.5rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    }
+    .caption-card h4 { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.8rem; }
+    .caption-text {
+      font-size: 0.92rem; line-height: 1.65; color: var(--text);
+      background: #f9f9f6; border-radius: 10px; padding: 1rem;
+      margin-bottom: 1rem; white-space: pre-wrap; min-height: 100px;
+    }
+    .hashtags { font-size: 0.82rem; color: var(--sky); font-weight: 600; margin-bottom: 1rem; line-height: 1.7; }
+    .btn-copy-caption {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: var(--sky); color: #fff; font-size: 0.82rem; font-weight: 700;
+      padding: 0.55rem 1.1rem; border-radius: 50px; border: none; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-copy-caption:hover { background: #155d8e; }
+    .btn-copy-caption.copied { background: var(--easy); }
+
+    .asset-strip {
+      background: #111; border-radius: 16px; padding: 1.5rem 2rem;
+      display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+    }
+    .asset-thumb {
+      width: 80px; height: 80px; border-radius: 8px; overflow: hidden; flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    .asset-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .asset-info { flex: 1; min-width: 180px; }
+    .asset-info h4 { color: #fff; font-size: 0.97rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .asset-info p { color: rgba(255,255,255,0.55); font-size: 0.82rem; }
+    .btn-asset-dl {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(255,255,255,0.12); color: #fff; font-size: 0.85rem; font-weight: 700;
+      padding: 0.65rem 1.3rem; border-radius: 50px; text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.2); transition: background 0.2s;
+    }
+    .btn-asset-dl:hover { background: rgba(255,255,255,0.22); }
+
+    /* ── WHY SECTION ── */
+    .why-section { padding: 1rem 1.5rem 3rem; max-width: 960px; margin: 0 auto; }
+    .why-section h2 { font-size: clamp(1.3rem, 2.5vw, 1.9rem); font-weight: 800; margin-bottom: 0.5rem; }
+    .why-section .sub { color: var(--muted); font-size: 0.97rem; margin-bottom: 2rem; }
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.2rem; }
+    .why-card { background: var(--card); border-radius: 14px; padding: 1.4rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .why-card .icon { font-size: 1.8rem; margin-bottom: 0.6rem; }
+    .why-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .why-card p { font-size: 0.85rem; color: var(--muted); }
+
+    /* ── PLACES ── */
+    .places-section { padding: 1rem 1.5rem 3rem; max-width: 960px; margin: 0 auto; }
+    .places-section h2 { font-size: clamp(1.3rem, 2.5vw, 1.9rem); font-weight: 800; margin-bottom: 0.5rem; }
+    .places-section .sub { color: var(--muted); font-size: 0.97rem; margin-bottom: 2rem; }
+    .places-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+    .place-card { background: var(--card); border-radius: 14px; padding: 1.2rem 1.4rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border-left: 4px solid var(--sky); }
+    .place-card .emoji { font-size: 1.5rem; margin-bottom: 0.4rem; }
+    .place-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .place-card p { font-size: 0.82rem; color: var(--muted); }
+
+    /* ── SHARE NUDGE ── */
+    .share-nudge { background: #111; color: #fff; text-align: center; padding: 3rem 1.5rem; }
+    .share-nudge h2 { font-size: clamp(1.3rem, 2.5vw, 1.9rem); font-weight: 800; margin-bottom: 0.8rem; }
+    .share-nudge p { color: rgba(255,255,255,0.65); font-size: 0.97rem; max-width: 520px; margin: 0 auto 1.5rem; }
+    .share-url {
+      display: inline-block; background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2); color: var(--ice);
+      font-size: 1rem; font-weight: 700; padding: 0.7rem 1.8rem;
+      border-radius: 50px; letter-spacing: 0.02em; text-decoration: none;
+    }
+
+    /* ── FOOTER ── */
+    footer { background: #0a0a0a; color: rgba(255,255,255,0.4); text-align: center; padding: 2rem 1rem; font-size: 0.8rem; }
+    footer a { color: var(--ice); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      .poster-layout { grid-template-columns: 1fr; }
+      .poster-preview { aspect-ratio: 16/9; }
+      .captions-grid { grid-template-columns: 1fr; }
+      .tab-btn { font-size: 0.88rem; padding: 0.85rem 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <img class="hero-img" src="assets/snow_rain_no_txt.png" alt="Mount Hotham Snake Gully — snow vs no snow" />
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Mount Hotham, Victoria · Snake Gully</p>
+    <h1 class="hero-headline">Help spread<br/>the <span>1.5° message</span></h1>
+    <p class="hero-sub">Print a poster. Share the link. Post to your socials. Every person who sees this is one more person who gets it.</p>
+  </div>
+</section>
+
+<!-- INTRO -->
+<div class="intro">
+  <h2>One image. One number. One conversation starter.</h2>
+  <p>This poster uses a real place — Mount Hotham's Snake Gully — to make the abstract feel immediate. Most people don't connect "1.5 degrees of warming" to anything tangible. A ski run turning to rain does that instantly.</p>
+  <p>Print it. Pin it. Post it. Leave it somewhere it'll be seen.</p>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrapper">
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('print', this)">
+      <span class="tab-icon">🖨️</span> Print & Distribute
+    </button>
+    <button class="tab-btn" onclick="switchTab('socials', this)">
+      <span class="tab-icon">📣</span> Post to Socials
+    </button>
+  </div>
+
+  <!-- ══ PRINT TAB ══ -->
+  <div id="tab-print" class="tab-panel active">
+
+    <!-- Action buttons at top -->
+    <div class="print-action-bar">
+      <a href="printable/A3_Poster.pdf" download class="btn btn-primary">
+        <svg viewBox="0 0 24 24"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5v-2z"/></svg>
+        Download A3 Poster (PDF)
+      </a>
+      <a href="printable/A3_Poster.pdf" target="_blank" class="btn btn-outline">
+        <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 12.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+        Preview Poster
+      </a>
+    </div>
+
+    <!-- Poster layout -->
+    <div class="poster-layout">
+      <div class="poster-preview">
+        <img src="assets/snow_rain_1.5d.png" alt="A3 Poster preview" />
+        <span class="poster-label">A3 · Print-ready PDF</span>
+      </div>
+      <div class="poster-info">
+        <h3>Free A3 Poster</h3>
+        <p>A print-ready PDF designed to work on any A3 printer — at home, at work, or at a print shop. Includes a QR code linking to <strong>ButWhatCanIDo.craiglambie.com</strong> so people can take action immediately.</p>
+        <ul>
+          <li>A3 size (297 × 420mm)</li>
+          <li>High resolution, print-ready PDF</li>
+          <li>QR code to the action page included</li>
+          <li>No sign-up, no cost — just download and print</li>
+          <li>Works on home printers and print shops</li>
+        </ul>
+        <div class="print-tip">
+          <strong>💡 Officeworks tip:</strong> A3 colour print costs around $2–3 per sheet. Print 5 and you've got a small campaign for the price of a coffee. Ask for "A3 colour, single-sided, gloss or satin."
+        </div>
+        <p class="file-note" style="margin-top:1rem;">PDF · A3 · ~2MB · Free to print and share</p>
+      </div>
+    </div>
+
+    <!-- How to steps -->
+    <div class="steps-section">
+      <h3>How to use it</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="num">01</div>
+          <h4>Download the PDF</h4>
+          <p>Free, high-res, print-ready. Works on any A3 printer or at Officeworks, Snap Print, or any local print shop.</p>
+        </div>
+        <div class="step">
+          <div class="num">02</div>
+          <h4>Print a few copies</h4>
+          <p>A3 colour at Officeworks costs around $2–3 per sheet. Print 5 for the price of a coffee.</p>
+        </div>
+        <div class="step">
+          <div class="num">03</div>
+          <h4>Put them somewhere visible</h4>
+          <p>Staffroom, gym, café, library, ski lodge, campus — anywhere people pause and look.</p>
+        </div>
+        <div class="step">
+          <div class="num">04</div>
+          <h4>Share the link too</h4>
+          <p>Post <strong>ButWhatCanIDo.craiglambie.com</strong> on your socials with a photo of the poster in situ.</p>
+        </div>
+        <div class="step">
+          <div class="num">05</div>
+          <h4>Talk about it</h4>
+          <p>If someone asks about the poster, tell them why you put it up. Personal stories beat statistics every time.</p>
+        </div>
+      </div>
+    </div>
+  </div><!-- /tab-print -->
+
+  <!-- ══ SOCIALS TAB ══ -->
+  <div id="tab-socials" class="tab-panel">
+
+    <!-- Social share buttons -->
+    <div class="social-action-bar">
+      <a href="https://mastodon.social/share?text=Snow%20or%20rain.%20Just%201.5%C2%B0C%20decides.%20See%20what%20you%20can%20do%20about%20it%20%E2%86%92%20https%3A%2F%2FButWhatCanIDo.craiglambie.com%20%23ClimateAction%20%231point5%20%23SnowOrRain"
+         target="_blank" class="btn-social btn-fediverse">
+        <svg viewBox="0 0 24 24"><path d="M21.327 8.566c0-4.339-2.843-5.61-2.843-5.61-1.433-.658-3.894-.935-6.451-.956h-.063c-2.557.021-5.016.298-6.45.956 0 0-2.843 1.272-2.843 5.61 0 .993-.019 2.181.012 3.441.103 4.243.778 8.425 4.701 9.463 1.809.479 3.362.579 4.612.51 2.268-.126 3.542-.809 3.542-.809l-.075-1.646s-1.621.511-3.441.449c-1.804-.062-3.707-.194-3.999-2.409a4.523 4.523 0 0 1-.04-.621s1.77.433 4.014.536c1.372.063 2.658-.08 3.965-.236 2.506-.299 4.688-1.843 4.962-3.254.434-2.223.398-5.424.398-5.424zm-3.353 5.59h-2.081V9.057c0-1.075-.452-1.62-1.357-1.62-1 0-1.501.647-1.501 1.927v2.791h-2.069V9.364c0-1.28-.501-1.927-1.502-1.927-.905 0-1.357.545-1.357 1.62v5.099H6.026V8.903c0-1.074.273-1.927.823-2.558.566-.631 1.307-.955 2.228-.955 1.065 0 1.872.409 2.405 1.228l.518.869.519-.869c.533-.819 1.34-1.228 2.405-1.228.92 0 1.662.324 2.228.955.549.631.822 1.484.822 2.558v5.253z"/></svg>
+        Fediverse / Mastodon
+      </a>
+      <a href="https://bsky.app/intent/compose?text=Snow%20or%20rain.%20Just%201.5%C2%B0C%20decides.%20See%20what%20you%20can%20do%20about%20it%20%E2%86%92%20https%3A%2F%2FButWhatCanIDo.craiglambie.com%20%23ClimateAction%20%231point5%20%23SnowOrRain"
+         target="_blank" class="btn-social btn-bluesky">
+        <svg viewBox="0 0 24 24"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.204-.659-.299-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/></svg>
+        BlueSky
+      </a>
+      <a href="https://www.instagram.com/" target="_blank" class="btn-social btn-instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        Instagram
+      </a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2FButWhatCanIDo.craiglambie.com"
+         target="_blank" class="btn-social btn-facebook">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Facebook
+      </a>
+      <a href="https://twitter.com/intent/tweet?text=Snow%20or%20rain.%20Just%201.5%C2%B0C%20decides.%20See%20what%20you%20can%20do%20%E2%86%92%20https%3A%2F%2FButWhatCanIDo.craiglambie.com%20%23ButWhatCanIDo%20%23ClimateAction%20%231point5"
+         target="_blank" class="btn-social btn-twitter">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        X / Twitter
+      </a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2FButWhatCanIDo.craiglambie.com"
+         target="_blank" class="btn-social btn-linkedin">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <button class="btn-social btn-copy-link" onclick="copyLink(this)">
+        <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+        Copy Link
+      </button>
+    </div>
+
+    <!-- Captions -->
+    <div class="captions-grid">
+      <div class="caption-card">
+        <h4>Short & punchy — Instagram / X / BlueSky</h4>
+        <div class="caption-text" id="caption-short">Snow or rain. Just 1.5°C decides.
+
+Mount Hotham's Snake Gully used to be a ski run. Now it's a muddy slope half the season.
+
+What can you actually do about it? More than you think. ↓</div>
+        <div class="hashtags">#ButWhatCanIDo #ClimateAction #MountHotham #1point5 #SnowOrRain #ActNow</div>
+        <button class="btn-copy-caption" onclick="copyCaption('caption-short', this)">
+          📋 Copy caption
+        </button>
+      </div>
+      <div class="caption-card">
+        <h4>Longer & personal — Facebook / LinkedIn / Mastodon</h4>
+        <div class="caption-text" id="caption-long">I've been thinking about what 1.5°C of warming actually means in a place I know.
+
+This is Mount Hotham's Snake Gully — one of the best ski runs in Victoria. The difference between a powder day and a rain day up there is less than 1.5 degrees.
+
+That's not an abstract number anymore. It's a ski run. It's a season. It's a livelihood for thousands of people in alpine communities.
+
+I found this site that breaks down what individuals can actually do — not in a guilt-trippy way, just practical, tiered actions across food, transport, travel, work and social influence.
+
+Worth a look 👇</div>
+        <div class="hashtags">#ButWhatCanIDo #ClimateAction #MountHotham #SkiAustralia #1point5 #ActOnClimate #SnowOrRain</div>
+        <button class="btn-copy-caption" onclick="copyCaption('caption-long', this)">
+          📋 Copy caption
+        </button>
+      </div>
+    </div>
+
+    <!-- Shareable image asset -->
+    <div class="asset-strip">
+      <div class="asset-thumb">
+        <img src="assets/snow_rain_1.5d.png" alt="Shareable image" />
+      </div>
+      <div class="asset-info">
+        <h4>Shareable image asset</h4>
+        <p>Download the billboard image to attach to your post — works on all platforms.</p>
+      </div>
+      <a href="assets/snow_rain_1.5d.png" download class="btn-asset-dl">
+        <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:#fff"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5v-2z"/></svg>
+        Download image
+      </a>
+    </div>
+
+  </div><!-- /tab-socials -->
+</div><!-- /tabs-wrapper -->
+
+<!-- WHY PROMOTE IT -->
+<div class="why-section">
+  <h2>Why bother putting up a poster?</h2>
+  <p class="sub">Because information alone doesn't change behaviour — but seeing something in the real world does.</p>
+  <div class="why-grid">
+    <div class="why-card"><div class="icon">🧠</div><h4>It makes the abstract concrete</h4><p>People understand "the ski run is turning to rain" far better than "global mean surface temperature anomaly." Local = real.</p></div>
+    <div class="why-card"><div class="icon">💬</div><h4>It starts conversations</h4><p>A striking image in a staffroom, café, or gym sparks questions. Questions lead to conversations. Conversations shift norms.</p></div>
+    <div class="why-card"><div class="icon">📱</div><h4>The QR code does the work</h4><p>Anyone who scans it lands on a page full of practical, tiered actions they can take today. The poster is just the door.</p></div>
+    <div class="why-card"><div class="icon">🌊</div><h4>Social proof compounds</h4><p>When people see others taking climate seriously, they're more likely to do the same. Visibility matters.</p></div>
+    <div class="why-card"><div class="icon">🏔️</div><h4>It's about a place people love</h4><p>Hotham isn't abstract. Millions of Australians have skied there, or know someone who has. That emotional connection is powerful.</p></div>
+    <div class="why-card"><div class="icon">🆓</div><h4>Zero cost, zero barrier</h4><p>Download, print, pin. That's it. No campaign to join, no donation required. Just a piece of paper doing quiet, persistent work.</p></div>
+  </div>
+</div>
+
+<!-- WHERE TO PUT IT -->
+<div class="places-section">
+  <h2>Where does it work best?</h2>
+  <p class="sub">High-dwell, high-relevance locations where people have a moment to stop and think.</p>
+  <div class="places-grid">
+    <div class="place-card"><div class="emoji">🏢</div><h4>Your workplace</h4><p>Staffroom, kitchen, lift lobby, meeting room. People you already know will see it.</p></div>
+    <div class="place-card"><div class="emoji">🏋️</div><h4>Gym or sports club</h4><p>Noticeboards, change rooms, reception areas. Active people often care about the outdoors.</p></div>
+    <div class="place-card"><div class="emoji">☕</div><h4>Cafés & restaurants</h4><p>Ask the owner. Many are happy to support local environmental messaging.</p></div>
+    <div class="place-card"><div class="emoji">🎿</div><h4>Ski clubs & lodges</h4><p>The most relevant audience of all. People who've watched the snow disappear over the years.</p></div>
+    <div class="place-card"><div class="emoji">🏫</div><h4>Schools & universities</h4><p>Noticeboards, student unions, staff rooms. Young people are already engaged — give them something to point to.</p></div>
+    <div class="place-card"><div class="emoji">📚</div><h4>Libraries & community centres</h4><p>Public noticeboards are designed for exactly this. No permission needed in most cases.</p></div>
+    <div class="place-card"><div class="emoji">🏥</div><h4>Medical waiting rooms</h4><p>Captive audience with time to read. Climate is a health issue — many practices are receptive.</p></div>
+    <div class="place-card"><div class="emoji">🏘️</div><h4>Your neighbourhood</h4><p>Local shops, community gardens, apartment building noticeboards. Start close to home.</p></div>
+  </div>
+</div>
+
+<!-- SHARE NUDGE -->
+<div class="share-nudge">
+  <h2>Share the action page directly</h2>
+  <p>Can't print right now? Share the link. Every person who lands on the action page is one more person with a practical path forward.</p>
+  <a href="https://ButWhatCanIDo.craiglambie.com" class="share-url">ButWhatCanIDo.craiglambie.com</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom:0.4rem;"><strong style="color:#fff">ButWhatCanIDo.craiglambie.com</strong></p>
+  <p>A personal project by <a href="https://craiglambie.com">Craig Lambie</a>. Free to share, print, and distribute.</p>
+  <p style="margin-top:0.6rem;">Mount Hotham, Victoria, Australia · Snake Gully</p>
+</footer>
+
+<script>
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  function copyCaption(id, btn) {
+    const text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '✅ Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = '📋 Copy caption';
+        btn.classList.remove('copied');
+      }, 2200);
+    });
+  }
+
+  function copyLink(btn) {
+    navigator.clipboard.writeText('https://ButWhatCanIDo.craiglambie.com').then(() => {
+      btn.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#fff"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Copied!';
+      setTimeout(() => {
+        btn.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#fff"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg> Copy Link';
+      }, 2200);
+    });
+  }
+</script>
+</body>
+</html>
